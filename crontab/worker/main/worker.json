@@ -1,0 +1,14 @@
+{
+  "etcd集群配置": "ip:端口号",
+  "Endpoints": ["127.0.0.1:2379"],
+  "etcd链接超时时间": "单位毫秒",
+  "DialTimeout": 5000,
+  "mongodb配置": "uri配置",
+  "MongodbUri": "mongodb://testdb:testdb@localhost:27017/testdb",
+  "mongodb连接超时": "单位毫秒",
+  "MongodbConnectTimeout": 5000,
+  "超时提交日志": "单位毫秒",
+  "JobLogCommitTimeout": 1000,
+  "每批提交的日志最大数量": "100",
+  "JobLogBatchSize": 100
+}

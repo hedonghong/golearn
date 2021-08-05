@@ -1,0 +1,13 @@
+{
+  "api端口": "端口号",
+  "ApiPort": 50001,
+  "api读超时时间": "单位毫秒",
+  "ApiReadTimeOut": 5000,
+  "api写超时时间": "单位毫秒",
+  "ApiWriteTimeOut": 5000,
+
+  "etcd集群配置": "ip:端口号",
+  "Endpoints": ["127.0.0.1:2379"],
+  "etcd链接超时时间": "单位毫秒",
+  "DialTimeout": 5000
+}
