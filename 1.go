@@ -6,5 +6,9 @@ type Person1 struct {
 
 func main() {
 	var a = &Person1{111}
+
 	println(a)
+
+
+
 }
