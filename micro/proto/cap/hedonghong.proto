@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package cap;
+//option go_package = "../bpgos/;bp";
+service Cap {
+  rpc SayHello(SayRequest) returns (SayResponse) {}
+}
+
+message SayRequest{
+  string message = 1;
+}
+
+message SayResponse {
+  string answer = 1;
+}
