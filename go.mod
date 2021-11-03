@@ -15,7 +15,7 @@ require (
 	github.com/go-playground/validator/v10 v10.6.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang/protobuf v1.4.3
+	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75
 	github.com/jmoiron/sqlx v1.3.4
@@ -23,10 +23,13 @@ require (
 	github.com/micro/go-micro/v2 v2.9.1
 	github.com/micro/micro/v2 v2.9.3 // indirect
 	github.com/micro/protoc-gen-micro/v2 v2.1.1 // indirect
+	github.com/mosn/holmes v0.0.0-20210830110104-685dc05437bf
 	github.com/olivere/elastic/v7 v7.0.27
 	github.com/pingcap/errors v0.11.5-0.20201126102027-b0a155152ca3
 	github.com/pkg/browser v0.0.0-20210706143420-7d21f8c997e2 // indirect
-	github.com/siddontang/go-log v0.0.0-20190221022429-1e957dd83bed // indirect
+	github.com/pyroscope-io/pyroscope v0.0.39
+	github.com/shirou/gopsutil v3.21.8+incompatible
+	github.com/siddontang/go-log v0.0.0-20190221022429-1e957dd83bed
 	github.com/stretchr/testify v1.7.0
 	go.mongodb.org/mongo-driver v1.6.0
 	go.uber.org/zap v1.18.1 // indirect

@@ -1,0 +1,357 @@
+[2021-09-06 12:55:11.506][Holmes] use the default memory percent calculated by gopsutil
+[2021-09-06 12:55:17.546][Holmes] warming up cycle : 1
+[2021-09-06 12:55:23.771][Holmes] warming up cycle : 2
+[2021-09-06 12:55:27.564][Holmes] warming up cycle : 3
+[2021-09-06 12:55:32.551][Holmes] warming up cycle : 4
+[2021-09-06 12:55:37.558][Holmes] warming up cycle : 5
+[2021-09-06 12:55:42.557][Holmes] warming up cycle : 6
+[2021-09-06 12:55:47.579][Holmes] warming up cycle : 7
+[2021-09-06 12:55:52.653][Holmes] warming up cycle : 8
+[2021-09-06 12:55:57.552][Holmes] warming up cycle : 9
+[2021-09-06 12:56:02.558][Holmes] pprof mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 6 6 6 6 6 6 12 12 12], current: 12
+[2021-09-06 12:56:02.558]heap profile: 0: 0 [30: 32212254720] @ heap/1048576
+0: 0 [30: 32212254720] @ 0x462e4a1 0x45e6984 0x45e9606 0x45eb1af 0x45e592a 0x4071b61
+#	0x462e4a0	golearn/conprof.Hello+0x50		/Users/sky.he/go/src/golearn/conprof/prof_test.go:36
+#	0x45e6983	net/http.HandlerFunc.ServeHTTP+0x43	/usr/local/go/src/net/http/server.go:2041
+#	0x45e9605	net/http.(*ServeMux).ServeHTTP+0x1a5	/usr/local/go/src/net/http/server.go:2416
+#	0x45eb1ae	net/http.serverHandler.ServeHTTP+0x20e	/usr/local/go/src/net/http/server.go:2836
+#	0x45e5929	net/http.(*conn).serve+0x1739		/usr/local/go/src/net/http/server.go:1924
+
+
+# runtime.MemStats
+# Alloc = 376448
+# TotalAlloc = 33287002480
+# Sys = 2290242048
+# Lookups = 0
+# Mallocs = 5804
+# Frees = 4094
+# HeapAlloc = 376448
+# HeapSys = 2214068224
+# HeapIdle = 2212585472
+# HeapInuse = 1482752
+# HeapReleased = 94715904
+# HeapObjects = 1710
+# Stack = 524288 / 524288
+# MSpan = 45696 / 49152
+# MCache = 6944 / 16384
+# BuckHashSys = 1444093
+# GCSys = 72854024
+# OtherSys = 1285883
+# NextGC = 4194304
+# LastGC = 1630904152272313000
+# PauseNs = [237489 86987 34623 31556 31802 60679 60977 29939 111447 38989 28001 34683 62460 101884 31591 61219 32683 202808 62848 127470 34168 56180 44790 66696 33677 33127 74515 20112453 59886 31862 77151 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# PauseEnd = [1630904120873037000 1630904122712832000 1630904136075825000 1630904136188111000 1630904137219307000 1630904137347633000 1630904144330099000 1630904144451473000 1630904144576301000 1630904144663933000 1630904144774362000 1630904144860614000 1630904144989546000 1630904145090362000 1630904145209110000 1630904145304973000 1630904145434245000 1630904145516098000 1630904145641312000 1630904145743559000 1630904145844306000 1630904145933840000 1630904146040942000 1630904146132401000 1630904146243869000 1630904146342482000 1630904146424678000 1630904146530484000 1630904151606536000 1630904152122984000 1630904152272313000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 31
+# NumForcedGC = 0
+# GCCPUFraction = 0.0006561382741879136
+# DebugGC = false
+
+[2021-09-06 12:56:09.848][Holmes] use the default memory percent calculated by gopsutil
+[2021-09-06 12:56:12.880][Holmes] warming up cycle : 1
+[2021-09-06 12:56:14.878][Holmes] warming up cycle : 2
+[2021-09-06 12:56:16.884][Holmes] warming up cycle : 3
+[2021-09-06 12:56:18.879][Holmes] warming up cycle : 4
+[2021-09-06 12:56:20.886][Holmes] warming up cycle : 5
+[2021-09-06 12:56:22.892][Holmes] warming up cycle : 6
+[2021-09-06 12:56:24.880][Holmes] warming up cycle : 7
+[2021-09-06 12:56:26.882][Holmes] warming up cycle : 8
+[2021-09-06 12:56:28.884][Holmes] warming up cycle : 9
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[2021-09-06 12:56:40.893][Holmes] pprof mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 6 0 0 0 0 0], current: 6
+[2021-09-06 12:56:40.893]heap profile: 1: 9472 [5: 3221236736] @ heap/1048576
+1: 9472 [1: 9472] @ 0x43d7253 0x404b7e9 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x403e5e4 0x4071b61
+#	0x43d7252	google.golang.org/protobuf/types/descriptorpb.init+0x2192	/Users/sky.he/go/pkg/mod/google.golang.org/protobuf@v1.26.0/types/descriptorpb/descriptor.pb.go:3584
+#	0x404b7e8	runtime.doInit+0xb8						/usr/local/go/src/runtime/proc.go:5474
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73						/usr/local/go/src/runtime/proc.go:5469
+#	0x403e5e3	runtime.main+0x183						/usr/local/go/src/runtime/proc.go:190
+
+0: 0 [3: 3221225472] @ 0x462e4a1 0x45e6984 0x45e9606 0x45eb1af 0x45e592a 0x4071b61
+#	0x462e4a0	golearn/conprof.Hello+0x50		/Users/sky.he/go/src/golearn/conprof/prof_test.go:36
+#	0x45e6983	net/http.HandlerFunc.ServeHTTP+0x43	/usr/local/go/src/net/http/server.go:2041
+#	0x45e9605	net/http.(*ServeMux).ServeHTTP+0x1a5	/usr/local/go/src/net/http/server.go:2416
+#	0x45eb1ae	net/http.serverHandler.ServeHTTP+0x20e	/usr/local/go/src/net/http/server.go:2836
+#	0x45e5929	net/http.(*conn).serve+0x1739		/usr/local/go/src/net/http/server.go:1924
+
+0: 0 [1: 1792] @ 0x40882b3 0x4088a1c 0x4089278 0x40c15b5 0x40c0b89 0x41f2dfe 0x41ff47f 0x429e06b 0x429c86a 0x4295053 0x4294d3a 0x42a6b95 0x42a6ea1 0x42a16fa 0x4071b61
+#	0x40882b2	syscall.SlicePtrFromStrings+0x222						/usr/local/go/src/syscall/exec_unix.go:93
+#	0x4088a1b	syscall.forkExec+0x2db								/usr/local/go/src/syscall/exec_unix.go:166
+#	0x4089277	syscall.StartProcess+0x97							/usr/local/go/src/syscall/exec_unix.go:248
+#	0x40c15b4	os.startProcess+0x554								/usr/local/go/src/os/exec_posix.go:53
+#	0x40c0b88	os.StartProcess+0xb8								/usr/local/go/src/os/exec.go:102
+#	0x41f2dfd	os/exec.(*Cmd).Start+0xc5d							/usr/local/go/src/os/exec/exec.go:422
+#	0x41ff47e	github.com/shirou/gopsutil/internal/common.Invoke.CommandWithContext+0x16e	/Users/sky.he/go/pkg/mod/github.com/shirou/gopsutil@v3.21.8+incompatible/internal/common/common.go:53
+#	0x429e06a	github.com/shirou/gopsutil/process.callPsWithContext+0x37a			/Users/sky.he/go/pkg/mod/github.com/shirou/gopsutil@v3.21.8+incompatible/process/process_darwin.go:458
+#	0x429c869	github.com/shirou/gopsutil/process.(*Process).TimesWithContext+0xb9		/Users/sky.he/go/pkg/mod/github.com/shirou/gopsutil@v3.21.8+incompatible/process/process_darwin.go:328
+#	0x4295052	github.com/shirou/gopsutil/process.(*Process).PercentWithContext+0x292		/Users/sky.he/go/pkg/mod/github.com/shirou/gopsutil@v3.21.8+incompatible/process/process.go:223
+#	0x4294d39	github.com/shirou/gopsutil/process.(*Process).Percent+0x89			/Users/sky.he/go/pkg/mod/github.com/shirou/gopsutil@v3.21.8+incompatible/process/process.go:207
+#	0x42a6b94	github.com/mosn/holmes.getUsageNormal+0x154					/Users/sky.he/go/pkg/mod/github.com/mosn/holmes@v0.0.0-20210830110104-685dc05437bf/util.go:99
+#	0x42a6ea0	github.com/mosn/holmes.collect+0x80						/Users/sky.he/go/pkg/mod/github.com/mosn/holmes@v0.0.0-20210830110104-685dc05437bf/util.go:129
+#	0x42a16f9	github.com/mosn/holmes.(*Holmes).startDumpLoop+0x4c9				/Users/sky.he/go/pkg/mod/github.com/mosn/holmes@v0.0.0-20210830110104-685dc05437bf/holmes.go:136
+
+
+# runtime.MemStats
+# Alloc = 281480
+# TotalAlloc = 4296020656
+# Sys = 1181598080
+# Lookups = 0
+# Mallocs = 6061
+# Frees = 4929
+# HeapAlloc = 281480
+# HeapSys = 1140326400
+# HeapIdle = 1139138560
+# HeapInuse = 1187840
+# HeapReleased = 65585152
+# HeapObjects = 1132
+# Stack = 524288 / 524288
+# MSpan = 45696 / 49152
+# MCache = 6944 / 16384
+# BuckHashSys = 1444661
+# GCSys = 38214024
+# OtherSys = 1023171
+# NextGC = 4194304
+# LastGC = 1630904200780565000
+# PauseNs = [48615 30748 61989 29396 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# PauseEnd = [1630904199889105000 1630904200491890000 1630904200696582000 1630904200780565000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 4
+# NumForcedGC = 0
+# GCCPUFraction = 1.9236003283456864e-05
+# DebugGC = false
+
+[2021-09-06 12:56:42.895][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:44.897][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:46.889][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:48.890][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:50.889][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:52.886][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:54.889][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:56.918][Holmes] mem dump is in cooldown
+[2021-09-06 12:56:58.947][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:00.898][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:02.956][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:04.896][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:06.894][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:08.895][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:10.891][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:12.891][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:14.955][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:16.899][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:18.889][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:20.895][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:22.887][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:24.888][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:26.888][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:28.892][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:30.890][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:32.885][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:34.948][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:36.899][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:38.887][Holmes] mem dump is in cooldown
+[2021-09-06 12:57:40.891][Holmes] mem dump is in cooldown
+[2021-09-08 09:50:08.621][Holmes] use the default memory percent calculated by gopsutil
+[2021-09-08 09:50:11.662][Holmes] warming up cycle : 1
+[2021-09-08 09:50:13.656][Holmes] warming up cycle : 2
+[2021-09-08 09:50:15.659][Holmes] warming up cycle : 3
+[2021-09-08 09:50:17.655][Holmes] warming up cycle : 4
+[2021-09-08 09:50:19.661][Holmes] warming up cycle : 5
+[2021-09-08 09:50:21.663][Holmes] warming up cycle : 6
+[2021-09-08 09:50:23.660][Holmes] warming up cycle : 7
+[2021-09-08 09:50:25.661][Holmes] warming up cycle : 8
+[2021-09-08 09:50:27.660][Holmes] warming up cycle : 9
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[2021-09-08 09:59:13.153][Holmes] pprof mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 6 0 0 0 0 0 0 0], current: 6
+[2021-09-08 09:59:13.154]heap profile: 0: 0 [2: 1073742240] @ heap/1048576
+0: 0 [1: 1073741824] @ 0x462e4a1 0x45e6984 0x45e9606 0x45eb1af 0x45e592a 0x4071b61
+#	0x462e4a0	golearn/conprof.Hello+0x50		/Users/sky.he/go/src/golearn/conprof/prof_test.go:36
+#	0x45e6983	net/http.HandlerFunc.ServeHTTP+0x43	/usr/local/go/src/net/http/server.go:2041
+#	0x45e9605	net/http.(*ServeMux).ServeHTTP+0x1a5	/usr/local/go/src/net/http/server.go:2416
+#	0x45eb1ae	net/http.serverHandler.ServeHTTP+0x20e	/usr/local/go/src/net/http/server.go:2836
+#	0x45e5929	net/http.(*conn).serve+0x1739		/usr/local/go/src/net/http/server.go:1924
+
+0: 0 [1: 416] @ 0x40110bc 0x401313d 0x40182d5 0x42d51fa 0x404b7e9 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x404b7a4 0x403e5e4 0x4071b61
+#	0x42d51f9	go/token.init.0+0xa9	/usr/local/go/src/go/token/token.go:284
+#	0x404b7e8	runtime.doInit+0xb8	/usr/local/go/src/runtime/proc.go:5474
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x404b7a3	runtime.doInit+0x73	/usr/local/go/src/runtime/proc.go:5469
+#	0x403e5e3	runtime.main+0x183	/usr/local/go/src/runtime/proc.go:190
+
+
+# runtime.MemStats
+# Alloc = 267616
+# TotalAlloc = 2148419648
+# Sys = 1181598080
+# Lookups = 0
+# Mallocs = 5317
+# Frees = 4211
+# HeapAlloc = 267616
+# HeapSys = 1140326400
+# HeapIdle = 1139154944
+# HeapInuse = 1171456
+# HeapReleased = 66527232
+# HeapObjects = 1106
+# Stack = 524288 / 524288
+# MSpan = 45696 / 49152
+# MCache = 6944 / 16384
+# BuckHashSys = 1444389
+# GCSys = 38214024
+# OtherSys = 1023443
+# NextGC = 4194304
+# LastGC = 1631066122628164000
+# PauseNs = [35890604 46276 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# PauseEnd = [1631066121908515000 1631066122628164000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 2
+# NumForcedGC = 0
+# GCCPUFraction = 0.00011554272105980017
+# DebugGC = false
+
+[2021-09-08 09:59:23.924][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:24.987][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:26.021][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:27.673][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:29.669][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:31.674][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:33.671][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:35.726][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:37.715][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:39.677][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:41.681][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:43.690][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:45.694][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:47.675][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:49.678][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:51.678][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:53.687][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:55.675][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:57.674][Holmes] mem dump is in cooldown
+[2021-09-08 09:59:59.681][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:01.700][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:03.677][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:05.697][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:07.671][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:09.678][Holmes] mem dump is in cooldown
+[2021-09-08 10:00:11.671][Holmes] mem dump is in cooldown
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
+[Holmes] NODUMP mem, config_min : 1, config_diff : 1, config_abs : 1, previous : [0 0 0 0 0 0 0 0 0 0], current: 0
