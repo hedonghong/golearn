@@ -79,7 +79,9 @@ type g struct {
     sched        gobuf
     syscallsp    uintptr        // if status==Gsyscall, syscallsp = sched.sp to use during gc
     syscallpc    uintptr        // if status==Gsyscall, syscallpc = sched.pc to use during gc
+    //期望 sp 位于栈顶，用于回溯检查
     stktopsp     uintptr        // expected sp at top of stack, to check in traceback
+    //wakeup 唤醒时候传递的参数
     param        unsafe.Pointer // passed parameter on wakeup
     atomicstatus uint32
     stackLock    uint32 // sigprof/scang lock; TODO: fold in to atomicstatus
@@ -130,6 +132,7 @@ type g struct {
     waiting        *sudog         // sudog structures this g is waiting on (that have a valid elem ptr); in lock order
     cgoCtxt        []uintptr      // cgo traceback context
     labels         unsafe.Pointer // profiler labels
+    // 为 time.Sleep 缓存的计时器
     timer          *timer         // cached timer for time.Sleep
     selectDone     uint32         // are we participating in a select and did someone win the race?
     
@@ -162,7 +165,9 @@ type m struct {
     divmod  uint32 // div/mod denominator for arm - known to liblink
     
     // Fields not known to debuggers.
+    //线程Id
     procid        uint64       // for debuggers, but offset not hard-coded
+    //处理Signal的g
     gsignal       *g           // signal-handling g
     goSigStack    gsignalStack // Go-allocated signal handling stack
     sigmask       sigset       // storage for saved signal mask
@@ -195,6 +200,7 @@ type m struct {
     traceback     uint8
     ncgocall      uint64      // number of cgo calls in total
     ncgo          int32       // number of cgo calls currently in progress
+    //cgo调用崩溃cgo回溯
     cgoCallersUse uint32      // if non-zero, cgoCallers in use temporarily
     cgoCallers    *cgoCallers // cgo traceback if crashing in cgo call
     //没有g需要运行时，工作线程睡眠在这个park成员上
@@ -252,12 +258,14 @@ type p struct {
     schedtick   uint32     // incremented on every scheduler call
     syscalltick uint32     // incremented on every system call
     sysmontick  sysmontick // last tick observed by sysmon
+    //反向链接到关联的 m （nil 则表示 idle）
     m           muintptr   // back-link to associated m (nil if idle)
     mcache      *mcache
     pcache      pageCache
     raceprocctx uintptr
-    
+    //不同大小的可用的 defer 结构池
     deferpool    [5][]*_defer // pool of available defer structs of different sizes (see panic.go)
+    //可运行的 Goroutine 队列，可无锁访问
     deferpoolbuf [5][32]*_defer
     
     // Cache of goroutine ids, amortizes accesses to runtime·sched.goidgen.
@@ -404,6 +412,7 @@ type schedt struct {
     pidle      puintptr // idle p's
 	//空闲的p链表数量
     npidle     uint32
+    //自旋状态的 M 的数量
     nmspinning uint32 // See "Worker thread parking/unparking" comment in proc.go.
     
     // Global runnable queue.
@@ -429,17 +438,18 @@ type schedt struct {
     //用于缓存g结构体对象，避免每次创建goroutine时都从新分配内存
     gFree struct {
     lock    mutex
-    stack   gList // Gs with stacks
-    noStack gList // Gs without stacks
+    stack   gList // Gs with stacks包含栈的 Gs
+    noStack gList // Gs without stacks没有栈的 Gs
     n       int32
     }
     
     // Central cache of sudog structs.
+    //sudog 结构的集中缓存
     sudoglock  mutex
     sudogcache *sudog
     
     // Central pool of available defer structs of different sizes.
-    deferlock mutex
+    deferlock mutex //不同大小的有效的 defer 结构的池
     deferpool [5]*_defer
     
     // freem is the list of m's waiting to be freed when their

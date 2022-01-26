@@ -13,8 +13,7 @@ import (
 
 //链表去重
 
-type
-Node struct {
+type Node struct {
 	Value int64
 	Next *Node
 }

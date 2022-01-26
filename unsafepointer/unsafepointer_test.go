@@ -73,6 +73,18 @@ func TestUnsafepointer2(t *testing.T) {
 	fmt.Println(unsafe.Offsetof(u.age))
 }
 
+func TestSss(t *testing.T) {
+	type Part2 struct {
+		e byte//1
+		c int8//1
+		a bool//1
+		b int32//4
+		d int64//8
+	}
+	part2 := Part2{}
+	fmt.Printf("part2 size: %d, align: %d\n", unsafe.Sizeof(part2), unsafe.Alignof(part2))
+}
+
 //每种类型的所占字节数不一样
 type S struct {
 	A uint32//4字节+4padding

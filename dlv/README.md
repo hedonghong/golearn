@@ -106,6 +106,15 @@ attach 模式：调试远程进程 for example：dlv attach 进行id
 一般生成环境中不希望二进制文件被调试 go build -ldflags "-s -w"
 
 
+方法 1 先使用 go build -gcflags "-N -l" main.go 生成对应的可执行二进制文件 再使用 go tool objdump -s "main." main 反编译获取对应的汇编
+反编译时"main." 表示只输出 main 包中相关的汇编"main.main" 则表示只输出 main 包中 main 方法相关的汇编
+
+方法 2 使用 go tool compile -S -N -l main.go 这种方式直接输出汇编
+方法 3 使用go build -gcflags="-N -l -S" main.go 直接输出汇编
+注意：在使用这些命令时，加上对应的 flag，否则某些逻辑会被编译器优化掉，而看不到对应完整的汇编代码
+-l 禁止内联 -N 编译时，禁止优化 -S 输出汇编代码
+
+
 (dlv) help
 The following commands are available:
 args -------------------------------- 打印函数参数。
@@ -194,10 +203,10 @@ https://xargin.com/go-and-plan9-asm/
 
 寄存器
 有4个核心的伪寄存器，这4个寄存器是编译器用来维护上下文、特殊标识等作用的：
-FP(Frame pointer): arguments and locals
-PC(Program counter): jumps and branches
-SB(Static base pointer): global symbols
-SP(Stack pointer): top of stack
+FP(Frame pointer): arguments and locals 使用如 symbol+offset(FP)的方式，引用 callee 函数的入参参数
+PC(Program counter): jumps and branches 返回地址
+SB(Static base pointer): global symbols 全局静态基指针，一般用在声明函数、全局变量中。全局静态基指针，一般用在声明函数、全局变量中。 
+SP(Stack pointer): top of stack  栈顶
 
 所有用户空间的数据都可以通过FP/SP(局部数据、输入参数、返回值)和SB(全局数据)访问。 通常情况下，不会对SB/FP寄存器进行运算操作，通常情况以会以SB/FP/SP作为基准地址，进行偏移解引用等操作。
 
@@ -423,7 +432,7 @@ go func() {} 过程是怎么样的？
 runtime.newproc
 runtime.newproc1
 malg&&allgadd 分配内存
-runqput  g入队 -> 存入runnext，若满了则把老G踢往local run queue,通过满也会把一办的G踢往global run queue
+runqput  g入队 -> 存入runnext，若满了则把老G踢往local run queue,本地队列也满了会把一半的G踢往global run queue
 wakep
 
 go协程的消费

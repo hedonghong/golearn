@@ -243,9 +243,143 @@ func main(){
         //把newg放入_p_的运行队列，初始化的时候一定是p的本地运行队列，其它时候可能因为本地队列满了而放入全局队列
         runqput(_p_, newg, true)
         
+        // 如果当前有空闲的P，但是没有自旋的M(nmspinning等于0)，并且主函数已执行，则唤醒或新建一个M来调度一个P执行，意思是没有正在找g运行的p和m时，那就启动把
+		//唤醒或新建一个M会通过调用wakep函数
+            //首先交换nmspinning到1, 成功再继续, 多个线程同时执行wakep函数只有一个会继续
+            //调用startm函数
+            //    调用pidleget从"空闲P链表"获取一个空闲的P
+            //    调用mget从"空闲M链表"获取一个空闲的M
+            //    如果没有空闲的M, 则调用newm新建一个M
+            //        newm会新建一个m的实例, m的实例包含一个g0, 然后调用newosprocclone一个系统线程
+            //        newosproc会调用syscall clone创建一个新的线程
+            //        线程创建后会设置TLS, 设置TLS中当前的g为g0, 然后执行mstart
+            //    调用notewakeup(&mp.park)唤醒线程
         if atomic.Load(&sched.npidle) != 0 && atomic.Load(&sched.nmspinning) == 0 && mainStarted {
             wakep()
         }
         releasem(_g_.m)
     }
+    // 可以参考：https://blog.csdn.net/u010853261/article/details/84790392
+```
+## runqput()
+
+```go
+// 把g放在本地队列，其实先放runnext
+// runqput tries to put g on the local runnable queue.
+// 如果next = false 就直接放在本地队列
+// If next is false, runqput adds g to the tail of the runnable queue.
+// 如果next = true 就直接runnext放
+// If next is true, runqput puts g in the _p_.runnext slot.
+// 如果runq满了，放在全局队列
+// If the run queue is full, runnext puts g on the global queue.
+// Executed only by the owner P.
+//runqput(_p_, newg, true)
+func runqput(_p_ *p, gp *g, next bool) {
+	if randomizeScheduler && next && fastrand()%2 == 0 {
+		next = false
+	}
+
+	if next {
+	retryNext:
+		//runnext看下是否有g，并且有没有其他线程在并发操作
+		oldnext := _p_.runnext
+		//有其他线程在并发操作那再跳到retryNext
+		if !_p_.runnext.cas(oldnext, guintptr(unsafe.Pointer(gp))) {
+			goto retryNext
+		}
+		//如果原来是空，那就直接返回了
+		if oldnext == 0 {
+			return
+		}
+		// Kick the old runnext out to the regular run queue.
+		// 原本存放在runnext的gp需要放入runq的尾部，逻辑在后面
+		gp = oldnext.ptr()
+	}
+
+retry:
+	//可能有其它线程正在并发修改runqhead成员，所以需要跟其它线程同步，偷g也有可能的
+	h := atomic.LoadAcq(&_p_.runqhead) // load-acquire, synchronize with consumers
+	t := _p_.runqtail
+	//判断队列是否满了（256），没有满入到if里面
+	if t-h < uint32(len(_p_.runq)) {
+		//队列还没有满，可以放入
+		_p_.runq[t%uint32(len(_p_.runq))].set(gp)
+        //虽然没有其它线程并发修改这个runqtail，但其它线程会并发读取该值以及p的runq成员
+        //这里使用StoreRel是为了：
+        //1，原子写入runqtail
+        //2，防止编译器和CPU乱序，保证上一行代码对runq的修改发生在修改runqtail之前
+        //3，可见行屏障，保证当前线程对运行队列的修改对其它线程立马可见
+		atomic.StoreRel(&_p_.runqtail, t+1) // store-release, makes the item available for consumption
+		return
+	}
+	//p的本地运行队列已满，需要放入全局运行队列
+	if runqputslow(_p_, gp, h, t) {
+		return
+	}
+	// the queue is not full, now the put above must succeed
+	goto retry//兜底
+}
+```
+
+```go
+// Put g and a batch of work from local runnable queue on global queue.
+// Executed only by the owner P.
+func runqputslow(_p_ *p, gp *g, h, t uint32) bool {
+	//获取本地队列的一半+1自身（gp）
+	var batch [len(_p_.runq)/2 + 1]*g
+
+	// First, grab a batch from local queue.
+	n := t - h
+	n = n / 2
+	//到了这里，应该是本地队列是满了的，否则就是有问题了
+	if n != uint32(len(_p_.runq)/2) {
+		throw("runqputslow: queue is not full")
+	}
+	//取本地队列的一半到batch
+	for i := uint32(0); i < n; i++ {
+		batch[i] = _p_.runq[(h+i)%uint32(len(_p_.runq))].ptr()
+	}
+	if !atomic.CasRel(&_p_.runqhead, h, h+n) { // cas-release, commits consume
+		//如果cas操作失败，说明已经有其它工作线程从_p_的本地运行队列偷走了一些goroutine，所以直接返回
+		return false
+	}
+	//把gp加上
+	batch[n] = gp
+
+	//打乱顺序，忽略，这个应该是调试的时候用到
+	if randomizeScheduler {
+		for i := uint32(1); i <= n; i++ {
+			j := fastrandn(i + 1)
+			batch[i], batch[j] = batch[j], batch[i]
+		}
+	}
+
+	// Link the goroutines.
+	//全局运行队列是一个链表，这里首先把所有需要放入全局运行队列的g链接起来，
+	//减少后面对全局链表的锁住时间，从而降低锁冲突
+	for i := uint32(0); i < n; i++ {
+		batch[i].schedlink.set(batch[i+1])
+	}
+	//形成链表
+	var q gQueue
+	q.head.set(batch[0])
+	q.tail.set(batch[n])
+
+	// Now put the batch on global queue.
+	//操作全局队列，需要加锁，尽量小的锁
+	lock(&sched.lock)
+	//行吧，批量直接放入全局队列了
+	globrunqputbatch(&q, int32(n+1))
+	unlock(&sched.lock)
+	return true
+}
+
+// Put a batch of runnable goroutines on the global runnable queue.
+// This clears *batch.
+// Sched must be locked.
+func globrunqputbatch(batch *gQueue, n int32) {
+    sched.runq.pushBackAll(*batch)
+    sched.runqsize += n
+    *batch = gQueue{}
+}
 ```

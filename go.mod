@@ -3,6 +3,7 @@ module golearn
 go 1.14
 
 require (
+	fyne.io/fyne/v2 v2.1.1
 	github.com/coreos/etcd v3.3.25+incompatible
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
@@ -35,7 +36,6 @@ require (
 	go.uber.org/zap v1.18.1 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/tools v0.1.4 // indirect
 	google.golang.org/grpc v1.39.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

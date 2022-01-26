@@ -8,12 +8,12 @@ import (
 func TestBubble(t *testing.T) {
 	var arr []int64 = []int64{3,4,1,7,3,9}
 	fmt.Println("before:", arr)
-	fmt.Println("after:", Bubble(arr))
+	//fmt.Println("after:", Bubble(arr))
 }
 
 
 //第一轮： 3,4,1,7,3,9  3,4对比，不用换，4，1对比，置换成 1，4 ....
-func Bubble(arr []int64) []int64 {
+func Bubble(arr []int) []int {
 	leng := len(arr)
 	if leng <= 1 {
 		return arr
@@ -34,9 +34,9 @@ func Bubble(arr []int64) []int64 {
 }
 
 func TestSelect(t *testing.T) {
-	var arr []int64 = []int64{3,4,1,7,3,9}
+	var arr []int = []int{3,4,1,7,3,9}
 	fmt.Println("before:", arr)
-	fmt.Println("after:", Select(arr))
+	//fmt.Println("after:", Select(arr))
 }
 
 func Select(arr []int64) []int64 {
