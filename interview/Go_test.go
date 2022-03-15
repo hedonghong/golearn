@@ -93,15 +93,15 @@ const (
 )
 //那么打印出来的结果是 i=0,j=3.14,k=2,l=3
 
- */
+*/
 const (
 	a = iota
 	b = iota
 )
 const (
 	name = "menglu"
-	c = iota
-	d = iota
+	c    = iota
+	d    = iota
 )
 
 func TestXX(t *testing.T) {
@@ -140,9 +140,9 @@ func TestXX4(t *testing.T) {
 		Age int
 	}
 
-	kv1 :=map[string]student{"xx":{Age: 1}}
-	kv2 :=map[string]*student{"xx":{Age: 1}}
-	kv3 := kv1["xx"]//map不允许直接通过健找到对应的对象进行赋值
+	kv1 := map[string]student{"xx": {Age: 1}}
+	kv2 := map[string]*student{"xx": {Age: 1}}
+	kv3 := kv1["xx"] //map不允许直接通过健找到对应的对象进行赋值
 	//map中的元素不是变量，因此不能寻址。
 	//1）map作为一个封装好的数据结构，由于它底层可能会由于数据扩张而进行迁移，所以拒绝直接寻址，避免产生野指针；
 	//2）map中的key在不存在的时候，赋值语句其实会进行新的k-v值的插入，所以拒绝直接寻址结构体内的字段，以防结构体不存在的时候可能造成的错误；
@@ -160,7 +160,7 @@ func TestXX4(t *testing.T) {
 }
 
 var (
-	mu sync.Mutex
+	mu    sync.Mutex
 	chain string
 )
 
@@ -170,63 +170,61 @@ func TestXX5(t *testing.T) {
 	fmt.Println(chain)
 }
 
-func A()  {
+func A() {
 	mu.Lock()
 	defer mu.Unlock()
-	chain = chain+"--A"
+	chain = chain + "--A"
 	B()
 }
 
-func B()  {
-	chain = chain+"--B"
+func B() {
+	chain = chain + "--B"
 	fmt.Println(chain)
 	C()
 }
 
-func C()  {
+func C() {
 	mu.Lock()
 	defer mu.Unlock()
-	chain = chain+"--C"
+	chain = chain + "--C"
 }
-
-
 
 var mu1 sync.RWMutex
 var count int
 
 func TestXX6(t *testing.T) {
 	go A1()
-	time.Sleep(2*time.Second)
+	time.Sleep(2 * time.Second)
 	mu1.Lock()
 	defer mu1.Unlock()
 	count++
 	fmt.Println(count)
 }
 
-func A1()  {
+func A1() {
 	mu1.RLock()
 	defer mu1.RUnlock()
 	B1()
 }
 
-func B1()  {
-	time.Sleep(5*time.Second)
+func B1() {
+	time.Sleep(5 * time.Second)
 	C1()
 }
 
-func C1()  {
+func C1() {
 	mu1.RLock()
 	defer mu1.RUnlock()
 }
 
-
 type user struct {
 	name string
-	age int
+	age  int
 }
 
 var u = user{name: "Ankur", age: 25}
 var g = &u
+
 func modifyUser(pu *user) {
 	fmt.Println("modifyUser Received Vaule", pu)
 	pu.name = "Anand"
@@ -247,7 +245,6 @@ func TestXX7(t *testing.T) {
 	time.Sleep(5 * time.Second)
 	fmt.Println(g)
 
-
 	// 拷贝进去的是地址，如果g发生改变，接收方也会相应改变
 	d := make(chan *user, 5)
 	d <- g
@@ -256,7 +253,6 @@ func TestXX7(t *testing.T) {
 	go printUser(d)
 	time.Sleep(5 * time.Second)
 }
-
 
 var wg1 sync.WaitGroup
 
@@ -269,4 +265,17 @@ func TestXX8(t *testing.T) {
 		wg1.Add(1)
 	}()
 	wg1.Wait()
+}
+
+func TestXX9(t *testing.T) {
+	var arr []int
+	arr = append(arr, 1, 2, 3)
+	newSlice := append(arr, 4)
+	fmt.Println(len(arr))
+	fmt.Println(cap(arr))
+	fmt.Println(cap(newSlice))
+	fmt.Println(cap(newSlice))
+	arr = append(arr, 5)
+	arr = append(arr, 6)
+	fmt.Println(newSlice)
 }

@@ -33,3 +33,26 @@ func TestChan(t *testing.T) {
 		}
 	}
 }
+func TestSSS(t *testing.T) {
+	arr := []int{3, 4, 5, 1, 2}
+	k := 0
+	l := len(arr)
+	for x1,x := range arr {
+		l1 := l-(x1+1)
+		for y1,y := range arr {
+			if x1 == y1 {
+				continue
+			}
+			if x > y {
+				k+=1
+				if l1 == k {
+					goto SS
+				}
+			} else {
+				break
+			}
+		}
+	}
+	SS:
+	fmt.Println(l-k)
+}

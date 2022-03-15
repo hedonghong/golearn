@@ -1,0 +1,12 @@
+[GINTEST->]2022/02/14 - 12:58:32.099	[31merror[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:247	redis connect ping failed, err:	{"err": "NOAUTH Authentication required."}
+[GINTEST->]2022/02/14 - 12:58:59.896	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/middleware/zaplogger.go:18	/demo	{"status": 404, "method": "POST", "path": "/demo", "query": "", "ip": "127.0.0.1", "user-agent": "PostmanRuntime/7.26.8", "errors": "", "cost": 0.00000018}
+[GINTEST->]2022/02/14 - 12:59:04.457	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/middleware/zaplogger.go:18	/demo	{"status": 200, "method": "GET", "path": "/demo", "query": "", "ip": "127.0.0.1", "user-agent": "PostmanRuntime/7.26.8", "errors": "", "cost": 0.000075866}
+[GINTEST->]2022/02/14 - 13:00:18.463	[31merror[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:247	redis connect ping failed, err:	{"err": "NOAUTH Authentication required."}
+[GINTEST->]2022/02/14 - 13:00:41.869	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:249	redis connect ping response:	{"pong": "PONG"}
+[GINTEST->]2022/02/14 - 23:47:27.968	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:251	redis connect ping response:	{"pong": "PONG"}
+[GINTEST->]2022/02/14 - 23:51:27.304	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:251	redis connect ping response:	{"pong": "PONG"}
+[GINTEST->]2022/02/14 - 23:52:28.888	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:251	redis connect ping response:	{"pong": "PONG"}
+[GINTEST->]2022/02/14 - 23:52:39.459	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/middleware/zaplogger.go:18	/user	{"status": 200, "method": "GET", "path": "/user", "query": "", "ip": "127.0.0.1", "user-agent": "PostmanRuntime/7.26.8", "errors": "", "cost": 8.663575966}
+[GINTEST->]2022/02/14 - 23:53:01.919	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:251	redis connect ping response:	{"pong": "PONG"}
+[GINTEST->]2022/02/14 - 23:53:07.903	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/middleware/zaplogger.go:18	/user	{"status": 200, "method": "GET", "path": "/user", "query": "", "ip": "127.0.0.1", "user-agent": "PostmanRuntime/7.26.8", "errors": "", "cost": 3.736383641}
+[GINTEST->]2022/02/14 - 23:58:01.698	[34minfo[0m	/Users/sky.he/go/src/golearn/goextra/gin/gin_test.go:251	redis connect ping response:	{"pong": "PONG"}

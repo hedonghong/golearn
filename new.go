@@ -9,3 +9,4 @@ func main() {
 	var d = new(map[int]int)
 	println(a, b, c, d)
 }
+
